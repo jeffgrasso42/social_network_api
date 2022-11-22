@@ -1,6 +1,5 @@
 // DEPENDENCIES
 const { Schema, model } = require('mongoose');
-const thoughtSchema = require('./Thought');
 const re = /^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+).([a-z]{2,20})$/;
 
 const userSchema = new Schema(
@@ -17,8 +16,18 @@ const userSchema = new Schema(
       required: true,
       match: re,
     },
-    thoughts: [thoughtSchema],
-    friends: [userSchema],
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Thought',
+      },
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   {
     toJSON: {
