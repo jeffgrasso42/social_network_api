@@ -52,4 +52,14 @@ module.exports = {
         res.status(500).json(err);
       });
   },
+
+  // Delete a user by ID
+  deleteUser(req, res) {
+    User.findOneAndDelete({ _id: req.params.userId }).then(user => {
+      if (!user) {
+        return res.status(404).json({ message: 'No user with this id!' });
+      }
+      res.json({ message: 'User deleted!' });
+    });
+  },
 };
