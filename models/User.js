@@ -1,6 +1,6 @@
 // DEPENDENCIES
 const { Schema, model } = require('mongoose');
-const re = /^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+).([a-z]{2,20})$/;
+const emailRegEx = /^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+).([a-z]{2,20})$/;
 
 const userSchema = new Schema(
   {
@@ -14,7 +14,7 @@ const userSchema = new Schema(
       type: String,
       unique: true,
       required: true,
-      match: re,
+      match: emailRegEx,
     },
     thoughts: [
       {
