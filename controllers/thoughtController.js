@@ -12,4 +12,16 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
+  // Get one thought by ID
+  async getSingleThought(req, res) {
+    try {
+      const thought = await Thought.findOne({ _id: req.params.thoughtId });
+
+      !thought ? res.status(404).json({ message: 'No thought with this id!' }) : res.json(thought);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  },
 };
