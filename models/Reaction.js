@@ -1,4 +1,5 @@
 const { Schema } = require('mongoose');
+const date = require('../utils/date.js');
 
 const reactionSchema = new Schema({
   reactionId: {
@@ -17,6 +18,7 @@ const reactionSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now(),
+    get: timestamp => date(timestamp),
   },
 });
 
