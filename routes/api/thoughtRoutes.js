@@ -30,7 +30,13 @@ router
 // /api/thoughts/:thoughtId/reactions
 router
   .route('/:thoughtId/reactions')
-  // POST - create a reaction
+  // POST - create a reaction for thought
   .post(addReaction);
+
+// /api/thoughts/:thoughtId/reactions/:reactionId
+router
+  .route('/:thoughtId/reactions/:reactionId')
+  // DELETE -  remove a reaction from a thought
+  .delete(removeReaction);
 
 module.exports = router;
