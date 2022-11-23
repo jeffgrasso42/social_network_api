@@ -27,4 +27,10 @@ router
   // DELETE - delete a thought by ID
   .delete(deleteThought);
 
+// /api/thoughts/:thoughtId/reactions
+router
+  .route('/:thoughtId/reactions')
+  // POST - create a reaction
+  .post(addReaction);
+
 module.exports = router;
