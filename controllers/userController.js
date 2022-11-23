@@ -62,4 +62,20 @@ module.exports = {
       res.json({ message: 'User deleted!' });
     });
   },
+
+  // Add friend
+  async addFriend(req, res) {
+    try {
+      const updatedUser = User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $push: { friends: req.params.friendId } },
+        { new: true }
+      );
+
+      !updatedUser ? res.status(404).json({ message: 'No user with this id!' }) : res.json(updatedUser);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json(err);
+    }
+  },
 };
