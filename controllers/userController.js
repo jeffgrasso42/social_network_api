@@ -1,5 +1,4 @@
 // DEPENDENCIES
-const { ObjectId } = require('mongoose').Types;
 const { User, Thought } = require('../models');
 
 module.exports = {
@@ -9,6 +8,7 @@ module.exports = {
       const users = await User.find().select('-__v');
       res.json(users);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   },
@@ -16,7 +16,7 @@ module.exports = {
   // Get one user by ID
   async getSingleUser(req, res) {
     try {
-      const user = await User.findOne({ _id: ObjectId(req.params.userId) })
+      const user = await User.findOne({ _id: req.params.userId })
         .select('-__v')
         .populate('thoughts')
         .populate('friends');
@@ -24,6 +24,7 @@ module.exports = {
       // return 404 if user is falsy
       !user ? res.status(404).json({ message: 'No user with that ID' }) : res.json(user);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   },
@@ -34,6 +35,7 @@ module.exports = {
       const user = await User.create(req.body);
       res.json(user);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   },
